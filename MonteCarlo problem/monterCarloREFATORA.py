@@ -2,8 +2,8 @@ import pandas as pd
 # ;LIMPAR COMENTARIOS NA VERSÃO FINAL
 
 array_aprox = []
-capacidadeMax  = 3 #.eixo Y número 1
-passagensOverbooking = 2 #quantas passagens a mais quero verificar
+capacidadeMax  = 50 #.eixo Y número 1
+passagensOverbooking = 10 #quantas passagens a mais quero verificar
 calcRangePassagensaMais = capacidadeMax + passagensOverbooking
 
 def bernoulli_0_ou_1(qtdPassagens):
@@ -72,7 +72,7 @@ def somarPassagens(df): #.eixo Y
    for i in range(1, qtdSimulacoes+1):
       Total = df[f"U_{i}"].sum() #total de cada coluna
    # .modo basico que so mostra resultado final (para computadores simples)
-      # no_Show(Total)
+      # no_Show(Total,qtdPassagens)
       # overbooking(Total)
       # multa(Total)
       # vendas(Total)
@@ -85,7 +85,7 @@ def somarPassagens(df): #.eixo Y
       gerarInformacoesIndividuais(i,Total)
    print(20*'-')
    print(f'\n')
-   print (f"### aproximacao: {media_aproximacao/(qtdSimulacoes)}")
+   print (f"*** aproximacao: {media_aproximacao/(qtdSimulacoes)}")
    return media_aproximacao/(qtdSimulacoes)
 
 
@@ -93,12 +93,12 @@ def somarPassagens(df): #.eixo Y
 # a mais e não conte dos casos que não vendeu a mais
 for vendasaMais in range (capacidadeMax+1, calcRangePassagensaMais+1): 
    qtdPassagens = vendasaMais #.eixo X de passageiros
-   qtdSimulacoes = 3 #.eixo Y de simulacoes (U) 
+   qtdSimulacoes = 10 #.eixo Y de simulacoes (U) 
    data = {'': [' '] * qtdPassagens}
    df = pd.DataFrame(data)# converter o dicionário em dataframe
    gerarSimulacoesBernoulli(df)
    array_aprox.append(somarPassagens(df))
-   print (f"### vendas a mais: {(vendasaMais - capacidadeMax)+1}")
-   print(df) #,gerar tabela grafica no terminal
+   print (f"*** vendas a mais: {(vendasaMais - capacidadeMax)}")
+   print(df) #,gerar tabela grafica no terminal 
 
 
