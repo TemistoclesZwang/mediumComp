@@ -72,17 +72,17 @@ def somarPassagens(df): #.eixo Y
    for i in range(1, qtdSimulacoes+1):
       Total = df[f"U_{i}"].sum() #total de cada coluna
    # .modo basico que so mostra resultado final (para computadores simples)
-      # no_Show(Total,qtdPassagens)
-      # overbooking(Total)
-      # multa(Total)
-      # vendas(Total)
-      # remarcacao(Total)
-      # arrecadado(Total)
+      no_Show(Total,qtdPassagens)
+      overbooking(Total)
+      multa(Total)
+      vendas(Total)
+      remarcacao(Total)
+      arrecadado(Total)
 
       media_aproximacao += arrecadado(Total)
 
    # .modo detalhado visual
-      gerarInformacoesIndividuais(i,Total)
+      # gerarInformacoesIndividuais(i,Total)
    print(20*'-')
    print(f'\n')
    print (f"*** aproximacao: {media_aproximacao/(qtdSimulacoes)}")
@@ -93,12 +93,12 @@ def somarPassagens(df): #.eixo Y
 # a mais e não conte dos casos que não vendeu a mais
 for vendasaMais in range (capacidadeMax+1, calcRangePassagensaMais+1): 
    qtdPassagens = vendasaMais #.eixo X de passageiros
-   qtdSimulacoes = 10 #.eixo Y de simulacoes (U) 
+   qtdSimulacoes = 10000 #.eixo Y de simulacoes (U) 
    data = {'': [' '] * qtdPassagens}
    df = pd.DataFrame(data)# converter o dicionário em dataframe
    gerarSimulacoesBernoulli(df)
    array_aprox.append(somarPassagens(df))
    print (f"*** vendas a mais: {(vendasaMais - capacidadeMax)}")
-   print(df) #,gerar tabela grafica no terminal 
+   # print(df) #,gerar tabela grafica no terminal 
 
 
